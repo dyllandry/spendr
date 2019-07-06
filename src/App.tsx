@@ -1,13 +1,15 @@
 import React from 'react';
 import './App.css';
-import Balance from './components/Balance';
+import BalanceType from './components/Balance';
+import VisibleTransactionList from './components/VisibleTransactionList';
 
 class App extends React.Component  {
   render() {
     return (
       <div className="App">
         <h1>Spendr</h1>
-        <Balance />
+        <BalanceType />
+        <VisibleTransactionList />
       </div>
     )  
   }

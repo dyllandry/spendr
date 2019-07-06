@@ -1,27 +1,21 @@
 import {
-    state,
+    Balance,
     INCREASE_BALANCE,
     DECREASE_BALANCE,
     BalanceActionTypes
 } from './types'
 
-export const initialState: state = {
-    balance: 25
-}
+const initialState: Balance = 25
 
-export function balance (
+export default function balanceReducer (
     state = initialState,
     action: BalanceActionTypes
-): state {
+): Balance {
     switch (action.type) {
         case INCREASE_BALANCE:
-            return {
-                balance: state.balance + action.payload
-            }
+            return state + action.payload
         case DECREASE_BALANCE:
-            return {
-                balance: state.balance + action.payload
-            }
+            return state + action.payload
         default:
             return state
     }

@@ -1,17 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 // eslint-disable-next-line
-import { state } from '../store/types'
+import { AppState } from '../store/'
+import { Balance as BalanceType } from '../store/balance/types'
 
-interface props {
-    balance: number
+function Balance ({
+    balance = 0
+} : { 
+    balance: BalanceType
+}) {
+    return <div>Balance: {balance}</div>
 }
 
-function Balance (props: props) {
-    return <div>Balance: {props.balance} </div>
-}
-
-const mapStateToProps = (state: state) => ({
+const mapStateToProps = (state: AppState) => ({
     balance: state.balance
 })
 

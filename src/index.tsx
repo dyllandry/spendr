@@ -9,7 +9,8 @@ import {
 } from 'redux'
 import { rootReducer } from './store/'
 import { Provider } from 'react-redux'
-import { increaseBalance } from './store/actions'
+import { increaseBalance } from './store/balance/actions'
+import { createTransaction } from './store/transaction/actions'
 import logger from 'redux-logger'
 
 
@@ -26,6 +27,10 @@ ReactDOM.render(
 );
 
 store.dispatch(increaseBalance(5))
+store.dispatch(createTransaction({
+    type: 'demand',
+    amount: 100
+}))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

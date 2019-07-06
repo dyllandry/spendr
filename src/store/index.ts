@@ -1,9 +1,10 @@
-// import { combineReducers } from 'redux'
-import { balance } from './reducers'
-export const rootReducer = balance
+import { combineReducers } from 'redux'
+import balanceReducer from './balance/reducers'
+import transactionsReducer from './transaction/reducers'
 
-// export const rootReducer = combineReducers({
-//     balance
-// })
+export const rootReducer = combineReducers({
+  balance: balanceReducer,
+  transactions: transactionsReducer
+})
 
 export type AppState = ReturnType<typeof rootReducer>
