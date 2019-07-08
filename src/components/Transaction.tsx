@@ -28,7 +28,14 @@ function Transaction({
   return (
     <li>
       {status} ${amount} {type} from: {origin}
-      <button onClick={() => approve(id, type, amount)}>Approve</button>
+      <button
+        onClick={() => approve(id, type, amount)}
+        style={{
+          display: status === TStatus.Pending ? 'inline-block' : 'none'
+        }}
+      >
+        Approve
+      </button>
     </li>
   )
 }

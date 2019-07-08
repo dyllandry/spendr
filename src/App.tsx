@@ -3,7 +3,7 @@ import './App.css';
 import BalanceType from './components/Balance';
 import VisibleTransactionList from './components/VisibleTransactionList';
 
-class App extends React.Component  {
+class App extends React.Component {
   render() {
     return (
       <div className="App">
@@ -11,7 +11,7 @@ class App extends React.Component  {
         <BalanceType />
         <VisibleTransactionList />
       </div>
-    )  
+    )
   }
 }
 

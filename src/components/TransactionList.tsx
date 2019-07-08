@@ -1,6 +1,7 @@
 import React from 'react'
 import { TransactionsState } from '../store/transaction/types';
 import Transaction from './Transaction'
+import TFilter from './TFilter';
 
 function TransactionList({
   transactions = {}
@@ -11,6 +12,7 @@ function TransactionList({
     <div>
       <h2>Transactions</h2>
       <ul>
+        <TFilter />
         {Object.entries(transactions).map(([id, t]) =>
           <Transaction
             key={id}
