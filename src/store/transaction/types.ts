@@ -1,20 +1,39 @@
 import Transaction from "../../components/Transaction";
 
 export interface Transaction {
-    id: string
-    type: string
-    amount: number
+    type: TType
+    amount: number,
+    origin: string,
+    message: string,
+    date: number,
+    status: TStatus
 }
 
-export type TransactionsState = Transaction[]
+export enum TType {
+    Deposit = "DEPOSIT",
+    Withdrawal = "WITHDRAWAL"
+}
+
+export enum TStatus {
+    Pending = "PENDING",
+    Approved = "APPROVED"
+}
+
+export interface TransactionsState {
+    [index: string]: Transaction
+}
 
 // Action type definitions
 export const CREATE_TRANSACTION = 'CREATE_TRANSACTION'
 export const DELETE_TRANSACTION = 'DELETE_TRANSACTION'
+export const APPROVE_TRANSACTION = 'APPROVE_TRANSACTION'
 
 interface CreateTransactionAction {
     type: typeof CREATE_TRANSACTION
-    payload: Transaction
+    payload: {
+        id: string,
+        transaction: Transaction
+    }
 }
 
 interface DeleteTransactionAction {
@@ -22,6 +41,12 @@ interface DeleteTransactionAction {
     payload: string
 }
 
-export type TransactionActionTypes = 
-    CreateTransactionAction | 
-    DeleteTransactionAction
+interface ApproveTransactionAction {
+    type: typeof APPROVE_TRANSACTION,
+    payload: string
+}
+
+export type TransactionActionTypes =
+    CreateTransactionAction |
+    DeleteTransactionAction |
+    ApproveTransactionAction

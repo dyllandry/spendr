@@ -7,7 +7,7 @@ import {
 
 const initialState: Balance = 25
 
-export default function balanceReducer (
+export default function balanceReducer(
     state = initialState,
     action: BalanceActionTypes
 ): Balance {
@@ -15,7 +15,7 @@ export default function balanceReducer (
         case INCREASE_BALANCE:
             return state + action.payload
         case DECREASE_BALANCE:
-            return state + action.payload
+            return state - action.payload
         default:
             return state
     }
