@@ -1,0 +1,12 @@
+.list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.horizontalPadding {
+  padding: 0 16px;
+}
+
+.header {
+  padding: 0 12px;
+}

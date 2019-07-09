@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './Transaction.module.css'
 import { TType, TStatus } from './../store/transaction/types'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -16,18 +17,18 @@ function Transaction({
   amount,
   origin,
   approve,
-  status
+  status,
 }: {
   id: string,
   type: TType,
   amount: number,
   origin: string,
   approve: Approve,
-  status: TStatus
+  status: TStatus,
 }) {
   return (
-    <li>
-      {status} ${amount} {type} from: {origin}
+    <li className={styles.transaction}>
+      {type === TType.Deposit ? '+' : '-'}${amount.toFixed(2)} from: {origin}
       <button
         onClick={() => approve(id, type, amount)}
         style={{

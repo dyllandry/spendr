@@ -1,0 +1,39 @@
+.container {
+  padding: 0 12px 0 6px;
+}
+
+.option {
+  background-color: none;
+  border: none;
+  font-size: 16px;
+  margin-bottom: 4px;
+  margin-right: 10px;
+}
+
+.option:hover {
+  cursor: pointer;
+}
+
+.option:hover .optionUnderline,
+.selected .optionUnderline {
+  background-color: hsl(0, 50%, 80%);
+}
+
+.selected .optionUnderline,
+.option.selected .optionUnderline {
+  background-color: hsl(0, 100%, 61%);
+}
+
+.selected {
+  composes: option;
+}
+
+.optionUnderline {
+  height: 3px;
+  background-color: clear;
+}
+
+.optionText {
+  display: inline-block;
+  margin-bottom: 2px;
+}

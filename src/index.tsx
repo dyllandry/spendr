@@ -37,6 +37,21 @@ store.dispatch(createTransaction({
     amount: 10
 }))
 
+store.dispatch(createTransaction({
+    origin: 'Mike',
+    amount: 25
+}))
+
+store.dispatch(createTransaction({
+    origin: 'Bobby',
+    amount: 55
+}))
+
+store.dispatch(createTransaction({
+    origin: 'Mike',
+    amount: 13
+}))
+
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA

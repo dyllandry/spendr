@@ -5,6 +5,8 @@ import { TStatus } from "../store/transaction/types";
 import { TFilter as TFilterType } from "../store/tFilter/types";
 import { AppState } from '../store';
 import { setTFilter } from "../store/tFilter/actions";
+import styles from "./TFilter.module.css"
+const classNames = require('classnames')
 
 function TFilter({
   selected,
@@ -14,24 +16,36 @@ function TFilter({
   select: (status: TFilterType) => void,
 }) {
   return (
-    < div >
+    <div className={styles.container}>
       <button
         onClick={() => select([TStatus.Pending])}
-        style={{
-          backgroundColor: selected.includes(TStatus.Pending) ? '#7edaff' : 'white'
-        }}
+        aria-label='Filter transactions by pending.'
+        title='Filter transactions by pending.'
+        className={classNames(
+          styles.option,
+          { [styles.selected]: selected.includes(TStatus.Pending) }
+        )}
       >
-        Pending
+        <span className={styles.optionText}>
+          Pending
+        </span>
+        <div className={styles.optionUnderline}></div>
       </button>
       <button
         onClick={() => select([TStatus.Approved])}
-        style={{
-          backgroundColor: selected.includes(TStatus.Approved) ? '#7edaff' : 'white'
-        }}
+        aria-label='Filter transactions by approved.'
+        title='Filter transactions by approved.'
+        className={classNames(
+          styles.option,
+          { [styles.selected]: selected.includes(TStatus.Approved) }
+        )}
       >
-        Approved
+        <span className={styles.optionText}>
+          Approved
+        </span>
+        <div className={styles.optionUnderline}></div>
       </button>
-    </div >
+    </div>
   )
 }
 

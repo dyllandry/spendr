@@ -1,0 +1,36 @@
+.header {
+  background-color: hsl(0, 100%, 61%);
+  padding: 8px 12px;
+}
+
+.siteTitle {
+  margin: 0;
+  font-style: italic;
+}
+
+.headerLink {
+  color: white;
+  text-decoration: none;
+}
+
+.headerLink:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.headerFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.headerNavList {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.headerNavLink {
+  font-size: 18px;
+}
