@@ -21,6 +21,7 @@ function TFilter({
         onClick={() => select([TStatus.Pending])}
         aria-label='Filter transactions by pending.'
         title='Filter transactions by pending.'
+        aria-controls='transactions-list'
         className={classNames(
           styles.option,
           { [styles.selected]: selected.includes(TStatus.Pending) }
@@ -35,6 +36,7 @@ function TFilter({
         onClick={() => select([TStatus.Approved])}
         aria-label='Filter transactions by approved.'
         title='Filter transactions by approved.'
+        aria-controls='transactions-list'
         className={classNames(
           styles.option,
           { [styles.selected]: selected.includes(TStatus.Approved) }

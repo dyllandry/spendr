@@ -12,8 +12,12 @@ function TransactionList({
   return (
     <div>
       <h2 className={styles.header}>Transactions</h2>
-      <ul className={styles['list']}>
-        <TFilter />
+      <TFilter />
+      <ul
+        id='transactions-list'
+        aria-live='polite'
+        className={styles['list']}
+      >
         {Object.entries(transactions).map(([id, t]) =>
           <Transaction
             key={id}
