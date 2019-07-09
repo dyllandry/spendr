@@ -17,6 +17,7 @@ function TFilter({
 }) {
   return (
     <div className={styles.container}>
+      Filter by
       <button
         onClick={() => select([TStatus.Pending])}
         aria-label='Filter transactions by pending.'

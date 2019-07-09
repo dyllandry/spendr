@@ -1,8 +1,8 @@
 .transaction {
   padding: 8px 12px;
-  background-color: white;
+  background-color: rgb(244, 244, 244);
 }
 
 .transaction:nth-child(2n) {
-  background-color: rgb(244, 244, 244);
+  background-color: white;
 }
