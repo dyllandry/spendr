@@ -14,7 +14,8 @@ export function createTransaction({
   origin = 'Bill',
   message = '',
   date = Date.now(),
-  status = TStatus.Pending
+  status = TStatus.Pending,
+  subject = ''
 
 } = {}): TransactionActionTypes {
   return {
@@ -27,7 +28,8 @@ export function createTransaction({
         origin,
         message,
         status,
-        date
+        date,
+        subject
       }
     }
   }

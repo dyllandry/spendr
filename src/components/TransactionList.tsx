@@ -26,6 +26,8 @@ function TransactionList({
             amount={t.amount}
             origin={t.origin}
             status={t.status}
+            date={t.date}
+            subject={t.subject}
           />
         )}
       </ul>

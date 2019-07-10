@@ -6,7 +6,8 @@ export interface Transaction {
     origin: string,
     message: string,
     date: number,
-    status: TStatus
+    status: TStatus,
+    subject: string
 }
 
 export enum TType {

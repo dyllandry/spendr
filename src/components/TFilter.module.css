@@ -4,7 +4,7 @@
 }
 
 .option {
-  background-color: none;
+  background: none;
   border: none;
   font-size: 16px;
   color: hsl(0, 50%, 80%);

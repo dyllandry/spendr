@@ -27,29 +27,27 @@ ReactDOM.render(
 );
 
 store.dispatch(createTransaction({
-    origin: 'Bob',
-    amount: 5
+    origin: 'Bob Whitaker',
+    amount: 5,
+    subject: 'Thanks for the skittles, I will never forget it.',
+    date: new Date(2019, 6, 9, 23, 59).getTime()
 }))
 
+const date = new Date(Date.now())
+
 store.dispatch(createTransaction({
-    origin: 'Jerry',
+    origin: 'Bob Whitaker',
+    amount: 5.50,
     type: TType.Withdrawal,
-    amount: 10
+    subject: 'Sorry, wrong person.',
+    date: date.setMinutes(date.getMinutes() - 4)
 }))
 
 store.dispatch(createTransaction({
-    origin: 'Mike',
-    amount: 25
-}))
-
-store.dispatch(createTransaction({
-    origin: 'Bobby',
-    amount: 55
-}))
-
-store.dispatch(createTransaction({
-    origin: 'Mike',
-    amount: 13
+    origin: 'Bob Whitaker',
+    amount: 0.50,
+    type: TType.Deposit,
+    subject: 'RE: Skittles'
 }))
 
 // If you want your app to work offline and load faster, you can change
