@@ -31,7 +31,6 @@ function TFilter({
         <span className={styles.optionText}>
           Pending
         </span>
-        <div className={styles.optionUnderline}></div>
       </button>
       <button
         onClick={() => select([TStatus.Approved])}
@@ -46,7 +45,6 @@ function TFilter({
         <span className={styles.optionText}>
           Approved
         </span>
-        <div className={styles.optionUnderline}></div>
       </button>
     </div>
   )

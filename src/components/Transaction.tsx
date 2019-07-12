@@ -9,6 +9,8 @@ import {
   decreaseBalance
 } from "../store/balance/actions";
 import Media from 'react-media'
+import FormattedDate from './FormattedDate'
+import { AppState } from '../store';
 
 function Transaction({
   id,
@@ -18,7 +20,9 @@ function Transaction({
   approve,
   status,
   date: dateMs,
-  subject
+  subject,
+  onClick,
+  focused
 }: {
   id: string,
   type: TType,
@@ -27,10 +31,19 @@ function Transaction({
   approve: (id: string, type: TType, amount: number) => void,
   status: TStatus,
   date: number,
-  subject: string
+  subject: string,
+  onClick: () => void,
+  focused: (id: string) => boolean
 }) {
   return (
-    <li className={styles.transaction}>
+    <li
+      className={
+        focused(id)
+          ? styles.focusedTransaction
+          : styles.transaction
+      }
+      onClick={onClick}
+    >
       <Media query='(min-width: 500px)'>
         <div className={styles.desktopTransaction}>
           <Origin origin={origin} />
@@ -39,6 +52,7 @@ function Transaction({
           <FormattedDate
             itemDate={new Date(dateMs)}
             nowDate={new Date(Date.now())}
+            className={styles.date}
           />
         </div>
       </Media>
@@ -49,6 +63,7 @@ function Transaction({
             <FormattedDate
               itemDate={new Date(dateMs)}
               nowDate={new Date(Date.now())}
+              className={styles.date}
             />
           </span>
           <span className={styles.mobileBottomFlex}>
@@ -104,6 +119,10 @@ function Amount({
   )
 }
 
+const mapStateToProps = (state: AppState) => ({
+  focused: (id: string) => state.detailedTransaction === id
+})
+
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   approve: (id: string, type: TType, amount: number) => {
     dispatch(approveTransaction(id))
@@ -118,43 +137,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   }
 })
 
-function FormattedDate({
-  itemDate,
-  nowDate
-}: {
-  itemDate: Date,
-  nowDate: Date
-}) {
-  const dateString = getFormattedDateString(itemDate, nowDate)
-  return (
-    <span className={styles.date}>
-      {dateString}
-    </span>
-  )
-}
-
-/**
- * Returns a formatted date string, either in day/month/year or a 00:00 am/pm
- * time if the transaction's date is today.
- * @param tDate {Date} Date of transaction.
- * @param now {Date} Date now.
- * @returns {string} Formatted date string.
- */
-function getFormattedDateString(tDate: Date, now: Date): string {
-  if (tDate.getDate() === now.getDate()) return getFormattedTimeString(tDate)
-  else return `${tDate.getDate()}/${tDate.getMonth() + 1}/${tDate.getFullYear()}`
-}
-
-/**
- * Returns a formatted string from a date object as a 00:00 am/pm format.
- * @param date {Date} 
- * @returns {Date} Formatted time.
- */
-function getFormattedTimeString(date: Date): string {
-  const hours = date.getHours() < 13 ? date.getHours() : date.getHours() % 12
-  const minutes = date.getMinutes().toString().padStart(2, '0')
-  const amPm = date.getHours() > 11 ? 'pm' : 'am'
-  return `${hours}:${minutes} ${amPm}`
-}
-
-export default connect(null, mapDispatchToProps)(Transaction)
+export default connect(mapStateToProps, mapDispatchToProps)(Transaction)

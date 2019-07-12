@@ -4,7 +4,8 @@ import {
   DELETE_TRANSACTION,
   TransactionActionTypes,
   APPROVE_TRANSACTION,
-  TStatus
+  TStatus,
+  DECLINE_TRANSACTION
 } from './types'
 
 const initialState: TransactionsState = {}
@@ -36,6 +37,17 @@ export default (
         })
       }
     }
+
+    case DECLINE_TRANSACTION: {
+      const { [action.payload]: transaction, ...stateToKeep } = state
+      return {
+        ...stateToKeep,
+        [action.payload]: Object.assign({}, transaction, {
+          status: TStatus.Declined
+        })
+      }
+    }
+
     default:
       return state
   }

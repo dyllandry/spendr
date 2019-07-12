@@ -7,33 +7,29 @@
   background: none;
   border: none;
   font-size: 16px;
-  color: hsl(0, 50%, 80%);
+  color: hsla(0, 100%, 35%, 1);
   margin-right: 5px;
+  border: 1px solid;
+  border-color: white;
+  border-color: rgba(0,0,0,0);
 }
 
 .option:first-child {
   margin-left: 8px;
 }
 
-.option.selected {
-  color: hsl(0, 100%, 61%);
+.option.selected, .option:hover {
+  border: 1px solid hsla(0, 100%, 35%, 1);
 }
 
 .option:hover {
   cursor: pointer;
 }
 
-.option:hover:not(.selected) .optionUnderline {
-  background-color: hsl(0, 50%, 80%);
-}
-
 .selected {
   composes: option;
-}
-
-.optionUnderline {
-  height: 2px;
-  background-color: clear;
+  color: white;
+  background-color: hsla(0, 100%, 35%, 1);
 }
 
 .optionText {

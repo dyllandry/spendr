@@ -1,0 +1,86 @@
+.default {
+  box-sizing: border-box;
+  width: 50%;
+  padding: 10px 20px 15px 20px;
+  border-top: 2px solid hsl(0, 100%, 61%);
+}
+
+.subject {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.originContainer {
+  margin-bottom: 10px;
+}
+
+.origin {
+  margin-right: 10px;
+}
+
+.date {
+  color: grey;
+}
+
+.message {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.noMessage {
+  composes: message;
+  color: hsla(0, 0%, 30%, 1);
+  font-style: italic;
+}
+
+.date {
+  color: hsla(0, 0%, 30%, 1);
+}
+
+.amountContainer {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.amount {
+  font-size: 48px;
+  margin-bottom: 25px;
+}
+
+.button {
+  width: 100px;
+  height: 50px;
+  font-size: 22px;
+  margin: 0px 25px;
+  background: none;
+  border: 1px solid;
+  border-radius: 0px;
+}
+
+.decline {
+  composes: button;
+  color: hsl(0, 71%, 38%);
+  border-color: hsl(0, 71%, 38%)
+}
+
+.approve {
+  composes: button;
+  color: hsla(133, 71%, 21%, 1);
+  border-color: hsla(133, 71%, 21%, 1);
+}
+
+.approve:hover,
+.decline:hover {
+  cursor: pointer
+}
+
+.approve:hover {
+  background-color: hsla(133, 71%, 21%, 1);
+  color: white;
+}
+
+.decline:hover {
+  background-color: hsl(0, 71%, 38%);
+  color: white;
+}

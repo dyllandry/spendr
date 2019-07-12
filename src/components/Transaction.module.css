@@ -4,6 +4,22 @@
   justify-content: space-between;
 }
 
+.focusedTransaction {
+  composes: transaction;
+  background-color: hsl(0, 71%, 38%)!important;
+  color: white;
+}
+
+.focusedTransaction .date {
+  color: white;
+}
+
+.transaction:hover,
+.transaction:nth-child(2n):hover {
+  cursor: pointer;
+  background-color: rgb(203, 203, 203);
+}
+
 .transaction:nth-child(2n) {
   background-color: white;
 }
@@ -19,11 +35,6 @@
   text-overflow: ellipsis;
   width: 125px;
   margin-right: 5px;
-}
-
-.date {
-  width: 90px;
-  text-align: right;
 }
 
 .amount {
@@ -59,4 +70,8 @@
 
 .mobileBottomFlex {
   display: flex;
+}
+
+.date {
+  color: hsla(0, 0%, 16%, 1);
 }

@@ -5,9 +5,23 @@ import {
   TransactionsState,
 } from '../store/transaction/types'
 import { TFilter } from "../store/tFilter/types";
+import { Dispatch } from 'redux';
+import {
+  focusTransaction,
+  unfocusTransaction
+} from "../store/detailedTransaction/actions";
 
 const mapStateToProps = (state: AppState) => ({
   transactions: getVisibleTransactions(state.transactions, state.tFilter),
+})
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  focusTransaction: (id: string) => {
+    dispatch(focusTransaction(id))
+  },
+  unfocusTransaction: () => {
+    dispatch(unfocusTransaction())
+  }
 })
 
 function getVisibleTransactions(transactions: TransactionsState, filter: TFilter) {
@@ -25,4 +39,7 @@ function getVisibleTransactions(transactions: TransactionsState, filter: TFilter
   return visibleTransactions
 }
 
-export default connect(mapStateToProps)(TransactionList)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TransactionList)
