@@ -13,6 +13,7 @@ import {
 
 const mapStateToProps = (state: AppState) => ({
   transactions: getVisibleTransactions(state.transactions, state.tFilter),
+  detailedTransaction: state.detailedTransaction
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

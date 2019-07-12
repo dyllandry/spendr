@@ -19,4 +19,36 @@
   list-style: none;
   padding-left: 0;
   margin: 0;
+  width: 50%;
+}
+
+.tDVContainer {
+  width: 50%;
+}
+
+@media only screen and (max-width: 900px) {
+  .twoColumnView {
+    position: relative;
+    display: block;
+    overflow: hidden;
+  }
+  .list {
+    /* display: inline-block; */
+    height: 100%;
+    width: 100%;
+    background-color: white;
+  }
+  .tDVContainer {
+    /* display: inline-block; */
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: white;
+  }
+  .tDVContainerVisible {
+    composes: tDVContainer;
+    display: block;
+  }
 }

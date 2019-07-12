@@ -4,16 +4,18 @@ import { TransactionsState } from '../store/transaction/types';
 import Transaction from './Transaction'
 import TransactionDetailView from './TransactionDetail';
 import TFilter from './TFilter';
-import Media from 'react-media'
+import { DetailedTransaction } from '../store/detailedTransaction/types';
 
 function TransactionList({
   transactions = {},
   focusTransaction,
-  unfocusTransaction
+  unfocusTransaction,
+  detailedTransaction
 }: {
   transactions: TransactionsState,
   focusTransaction: (id: string) => void,
-  unfocusTransaction: () => void
+  unfocusTransaction: () => void,
+  detailedTransaction: DetailedTransaction
 }) {
   return (
     <div className={styles.container}>
@@ -41,9 +43,15 @@ function TransactionList({
             />
           )}
         </ul>
-        <Media query='(min-width: 900px)'>
-          <TransactionDetailView />
-        </Media>
+        <div className={
+          detailedTransaction === null
+            ? styles.tDVContainer
+            : styles.tDVContainerVisible
+        }>
+          <TransactionDetailView
+            callback={() => unfocusTransaction()}
+          />
+        </div>
       </div>
     </div>
   )

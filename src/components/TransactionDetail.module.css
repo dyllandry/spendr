@@ -1,8 +1,9 @@
 .default {
   box-sizing: border-box;
-  width: 50%;
   padding: 10px 20px 15px 20px;
   border-top: 2px solid hsl(0, 100%, 61%);
+  overflow-y: scroll;
+  height: 100%;
 }
 
 .subject {
@@ -41,6 +42,7 @@
 .amountContainer {
   margin-top: 25px;
   text-align: center;
+  margin-bottom: 35px;
 }
 
 .amount {
@@ -56,6 +58,12 @@
   background: none;
   border: 1px solid;
   border-radius: 0px;
+}
+
+@media only screen and (max-width: 350px) {
+  .button{
+    margin: 0px 15px;
+  }
 }
 
 .decline {
@@ -83,4 +91,34 @@
 .decline:hover {
   background-color: hsl(0, 71%, 38%);
   color: white;
+}
+
+.closeButton {
+  float: right;
+  box-sizing: border-box;
+  font-size: 18px;
+  padding: 0;
+  width: 23px;
+  height: 23px;
+  color: hsl(0, 71%, 38%);
+  border-radius: 1px;
+  border: 1px solid hsl(0, 71%, 38%);
+  background: none;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+@media only screen and (max-width: 900px) {
+  .closeButton{
+    font-size: 20px;
+    width: 28px;
+    height: 28px;
+  } 
+}
+
+.closeButton:hover {
+  background-color: hsl(0, 71%, 38%);
+  border-color: hsl(0, 71%, 38%);
+  color: white;
+  cursor: pointer;
 }

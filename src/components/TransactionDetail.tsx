@@ -8,6 +8,7 @@ import FormattedDate from './FormattedDate';
 import { Dispatch } from 'redux';
 import { approveTransaction, declineTransaction } from '../store/transaction/actions';
 import { increaseBalance, decreaseBalance } from '../store/balance/actions';
+import { unfocusTransaction } from '../store/detailedTransaction/actions';
 
 const TransactionDetailView = ({
   id,
@@ -16,6 +17,8 @@ const TransactionDetailView = ({
   declineTransaction,
   increaseBalance,
   decreaseBalance,
+  callback,
+  unfocusTransaction
 }: {
   id: DetailedTransaction,
   transaction: Transaction | null,
@@ -23,6 +26,8 @@ const TransactionDetailView = ({
   declineTransaction: (id: string) => void,
   increaseBalance: (amount: number) => void,
   decreaseBalance: (amount: number) => void
+  callback?: () => void,
+  unfocusTransaction: () => void
 }) => {
   return (
     <div className={styles.default}>
@@ -33,7 +38,15 @@ const TransactionDetailView = ({
       ) : (
           <Fragment>
             <div className={styles.subject}>
-              {t.subject}
+              <button
+                onClick={() => unfocusTransaction()}
+                className={styles.closeButton}
+              >
+                X
+              </button>
+              <span>
+                {t.subject}
+              </span>
             </div>
             <div className={styles.originContainer}>
               <span className={styles.origin}>
@@ -64,7 +77,10 @@ const TransactionDetailView = ({
                       className={styles.decline}
                       onClick={
                         id !== null
-                          ? () => declineTransaction(id)
+                          ? () => {
+                            declineTransaction(id)
+                            if (callback) callback()
+                          }
                           : undefined
                       }
                     >
@@ -81,6 +97,7 @@ const TransactionDetailView = ({
                             } else if (t.type === TType.Withdrawal) {
                               decreaseBalance(t.amount)
                             }
+                            if (callback) callback()
                           }
                           : undefined
                       }
@@ -108,7 +125,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   approveTransaction: (id: string) => dispatch(approveTransaction(id)),
   declineTransaction: (id: string) => dispatch(declineTransaction(id)),
   increaseBalance: (amount: number) => dispatch(increaseBalance(amount)),
-  decreaseBalance: (amount: number) => dispatch(decreaseBalance(amount))
+  decreaseBalance: (amount: number) => dispatch(decreaseBalance(amount)),
+  unfocusTransaction: () => dispatch(unfocusTransaction())
 })
 
 export default connect(

@@ -50,7 +50,7 @@
 .mobileTransaction,
 .desktopTransaction {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .desktopTransaction {
@@ -59,7 +59,7 @@
 
 .mobileTransaction {
   flex-direction: column;
-  min-height: 60px;
+  /* min-height: 60px; */
 }
 
 .mobileTopFlex {
@@ -74,4 +74,11 @@
 
 .date {
   color: hsla(0, 0%, 16%, 1);
+}
+
+@media only screen and (max-width: 500px) {
+  .amount {
+    font-size: 17px;
+    font-weight: bold;
+  }
 }

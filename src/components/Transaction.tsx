@@ -102,7 +102,7 @@ function Origin({
 
 function Amount({
   amount,
-  type,
+  type
 }: {
   amount: number,
   type: TType
