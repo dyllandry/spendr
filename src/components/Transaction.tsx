@@ -3,11 +3,6 @@ import styles from './Transaction.module.css'
 import { TType, TStatus } from './../store/transaction/types'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { approveTransaction } from '../store/transaction/actions'
-import {
-  increaseBalance,
-  decreaseBalance
-} from "../store/balance/actions";
 import Media from 'react-media'
 import FormattedDate from './FormattedDate'
 import { AppState } from '../store';
@@ -17,8 +12,6 @@ function Transaction({
   type,
   amount,
   origin,
-  approve,
-  status,
   date: dateMs,
   subject,
   onClick,
@@ -28,8 +21,6 @@ function Transaction({
   type: TType,
   amount: number,
   origin: string,
-  approve: (id: string, type: TType, amount: number) => void,
-  status: TStatus,
   date: number,
   subject: string,
   onClick: () => void,
@@ -123,18 +114,4 @@ const mapStateToProps = (state: AppState) => ({
   focused: (id: string) => state.detailedTransaction === id
 })
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  approve: (id: string, type: TType, amount: number) => {
-    dispatch(approveTransaction(id))
-    switch (type) {
-      case TType.Deposit:
-        dispatch(increaseBalance(amount))
-        break
-      case TType.Withdrawal:
-        dispatch(decreaseBalance(amount))
-        break
-    }
-  }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Transaction)
+export default connect(mapStateToProps)(Transaction)

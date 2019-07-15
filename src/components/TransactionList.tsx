@@ -36,7 +36,6 @@ function TransactionList({
               type={t.type}
               amount={t.amount}
               origin={t.origin}
-              status={t.status}
               date={t.date}
               subject={t.subject}
               onClick={() => { focusTransaction(id) }}
