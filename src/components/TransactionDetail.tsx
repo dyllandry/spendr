@@ -6,11 +6,19 @@ import { AppState } from '../store';
 import { Transaction, TStatus, TType } from '../store/transaction/types';
 import FormattedDate from './FormattedDate';
 import { Dispatch } from 'redux';
-import { approveTransaction, declineTransaction } from '../store/transaction/actions';
-import { increaseBalance, decreaseBalance } from '../store/balance/actions';
+import {
+  approveTransaction as approveTransactionAction,
+  declineTransaction as declineTransactionAction
+} from '../store/transaction/actions';
+import {
+  increaseBalance as increaseBalanceAction,
+  decreaseBalance as decreaseBalanceAction,
+  setAnimationProgress
+} from '../store/balance/actions';
 import { unfocusTransaction } from '../store/detailedTransaction/actions';
 
 const TransactionDetailView = ({
+  balanceAmount,
   id,
   transaction: t,
   approveTransaction,
@@ -18,16 +26,19 @@ const TransactionDetailView = ({
   increaseBalance,
   decreaseBalance,
   callback,
-  unfocusTransaction
+  unfocusTransaction,
+  resetAnimationProgress
 }: {
+  balanceAmount: number
   id: DetailedTransaction,
   transaction: Transaction | null,
-  approveTransaction: (id: string) => void,
-  declineTransaction: (id: string) => void,
-  increaseBalance: (amount: number) => void,
-  decreaseBalance: (amount: number) => void
+  approveTransaction: typeof approveTransactionAction,
+  declineTransaction: typeof declineTransactionAction,
+  increaseBalance: typeof increaseBalanceAction,
+  decreaseBalance: typeof decreaseBalanceAction
   callback?: () => void,
-  unfocusTransaction: () => void
+  unfocusTransaction: () => void,
+  resetAnimationProgress: () => void
 }) => {
   return (
     <div className={styles.default}>
@@ -93,10 +104,11 @@ const TransactionDetailView = ({
                           ? () => {
                             approveTransaction(id)
                             if (t.type === TType.Deposit) {
-                              increaseBalance(t.amount)
+                              increaseBalance(t.amount, balanceAmount, Date.now())
                             } else if (t.type === TType.Withdrawal) {
-                              decreaseBalance(t.amount)
+                              decreaseBalance(t.amount, balanceAmount, Date.now())
                             }
+                            resetAnimationProgress()
                             if (callback) callback()
                           }
                           : undefined
@@ -115,6 +127,7 @@ const TransactionDetailView = ({
 }
 
 const mapStateToProps = (state: AppState) => ({
+  balanceAmount: state.balance.amount,
   id: state.detailedTransaction,
   transaction: state.detailedTransaction !== null
     ? state.transactions[state.detailedTransaction]
@@ -122,11 +135,20 @@ const mapStateToProps = (state: AppState) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  approveTransaction: (id: string) => dispatch(approveTransaction(id)),
-  declineTransaction: (id: string) => dispatch(declineTransaction(id)),
-  increaseBalance: (amount: number) => dispatch(increaseBalance(amount)),
-  decreaseBalance: (amount: number) => dispatch(decreaseBalance(amount)),
-  unfocusTransaction: () => dispatch(unfocusTransaction())
+  approveTransaction: (id: string) => dispatch(approveTransactionAction(id)),
+  declineTransaction: (id: string) => dispatch(declineTransactionAction(id)),
+  increaseBalance: (
+    amount: number,
+    amountBeforeIncrease: number,
+    updatedAt: number
+  ) => dispatch(increaseBalanceAction(amount, amountBeforeIncrease, updatedAt)),
+  decreaseBalance: (
+    amount: number,
+    amountBeforeDecrease: number,
+    updatedAt: number
+  ) => dispatch(decreaseBalanceAction(amount, amountBeforeDecrease, updatedAt)),
+  unfocusTransaction: () => dispatch(unfocusTransaction()),
+  resetAnimationProgress: () => dispatch(setAnimationProgress(0))
 })
 
 export default connect(

@@ -1,8 +1,7 @@
 import React from 'react'
 import styles from './Transaction.module.css'
-import { TType, TStatus } from './../store/transaction/types'
+import { TType } from './../store/transaction/types'
 import { connect } from 'react-redux'
-import { Dispatch } from 'redux'
 import Media from 'react-media'
 import FormattedDate from './FormattedDate'
 import { AppState } from '../store';
