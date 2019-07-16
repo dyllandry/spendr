@@ -27,29 +27,51 @@ ReactDOM.render(
 );
 
 store.dispatch(createTransaction({
-    origin: 'Bob Whitaker',
+    origin: 'Jonas Whitaker',
     amount: 5,
-    subject: 'Thanks for the skittles, I will never forget it.',
-    message: 'Lorem ipsum dolor amet vape yr listicle YOLO bitters, dreamcatcher synth pickled pitchfork offal literally shoreditch. Schlitz direct trade humblebrag locavore tote bag, succulents trust fund polaroid cold-pressed intelligentsia iceland bushwick activated charcoal. Organic viral tumeric venmo gastropub, heirloom kitsch hashtag blue bottle listicle kogi. 8-bit church-key vegan polaroid woke plaid man bun. Paleo vaporware truffaut offal. Edison bulb heirloom poutine tilde enamel pin. Ennui ethical gochujang aesthetic kinfolk shaman jean shorts hashtag chillwave, street art forage hoodie retro portland.',
+    subject: 'Thanks for the pizza last night.',
+    message: 'We should get together again some time, I did not know you played FIFA, too. It was too much fun. Let me know!',
     date: new Date(2019, 6, 9, 23, 59).getTime()
 }))
 
 const date = new Date(Date.now())
+const twoDaysLater = new Date(Date.now())
+twoDaysLater.setDate(twoDaysLater.getDate() + 2)
+const twoDaysLaterFormatted = `${twoDaysLater.getDate()}/${twoDaysLater.getMonth() + 1}/${twoDaysLater.getFullYear()}`
 
 store.dispatch(createTransaction({
-    origin: 'Bob Whitaker',
-    amount: 5.50,
+    origin: 'Spotify Inc.',
+    amount: 11.50,
     type: TType.Withdrawal,
-    subject: 'Sorry, wrong person.',
-    date: date.setMinutes(date.getMinutes() - 4)
+    subject: 'Premium Subscription',
+    date: date.setMinutes(date.getMinutes() - 4),
+    message: `Approve your Spotify Premium subscription transaction by ${twoDaysLaterFormatted} to receive uninterrupted service.`,
 }))
 
+const weeklyPay = 650
+const savingsDeduction = weeklyPay * 0.05
+const taxWithholdings = weeklyPay * 0.15
+const totalReceivedPay = weeklyPay - savingsDeduction - taxWithholdings
+
 store.dispatch(createTransaction({
-    origin: 'Bob Whitaker',
-    amount: 0.50,
+    origin: 'Barry\'s Bagels',
+    amount: totalReceivedPay,
     type: TType.Deposit,
-    subject: 'RE: Skittles',
-    message: 'This has become a very embarrasing ordeal.'
+    subject: 'Paycheck',
+    date: new Date(2019, 6, 9, 23, 59).getTime(),
+    message: `Weekly pay: $${weeklyPay}. Deposit into high interest savings: $${savingsDeduction.toFixed(2)}. Tax withholdings: $${taxWithholdings.toFixed(2)}. Total received pay: $${totalReceivedPay.toFixed(2)}.`
+}))
+
+const phoneCasePrice = 24.99
+const phoneCaseTax = phoneCasePrice * 0.13
+const totalPhoneCasePrice = phoneCasePrice + phoneCaseTax
+
+store.dispatch(createTransaction({
+    origin: 'Amazon',
+    amount: totalPhoneCasePrice,
+    type: TType.Withdrawal,
+    subject: 'Order: AbIek3I903-a',
+    message: `1 SafeTech Pixel 2 Phonecase: $${phoneCasePrice.toFixed(2)} + $${phoneCaseTax.toFixed(2)} = $${totalPhoneCasePrice.toFixed(2)}. Approve the transaction to begin order processing as soon as the next business day.`
 }))
 
 // If you want your app to work offline and load faster, you can change
