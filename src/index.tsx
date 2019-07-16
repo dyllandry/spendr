@@ -39,13 +39,15 @@ const twoDaysLater = new Date(Date.now())
 twoDaysLater.setDate(twoDaysLater.getDate() + 2)
 const twoDaysLaterFormatted = `${twoDaysLater.getDate()}/${twoDaysLater.getMonth() + 1}/${twoDaysLater.getFullYear()}`
 
+const spotifyPrice = 11.5
+
 store.dispatch(createTransaction({
     origin: 'Spotify Inc.',
-    amount: 11.50,
+    amount: spotifyPrice,
     type: TType.Withdrawal,
     subject: 'Premium Subscription',
-    date: date.setMinutes(date.getMinutes() - 4),
-    message: `Approve your Spotify Premium subscription transaction by ${twoDaysLaterFormatted} to receive uninterrupted service.`,
+    message: `Recurring Monthly Premium Charge: $${spotifyPrice.toFixed(2)}\n
+*Approve your Spotify Premium subscription transaction by ${twoDaysLaterFormatted} to receive uninterrupted service.*`,
 }))
 
 const weeklyPay = 650
@@ -59,7 +61,10 @@ store.dispatch(createTransaction({
     type: TType.Deposit,
     subject: 'Paycheck',
     date: new Date(2019, 6, 9, 23, 59).getTime(),
-    message: `Weekly pay: $${weeklyPay}. Deposit into high interest savings: $${savingsDeduction.toFixed(2)}. Tax withholdings: $${taxWithholdings.toFixed(2)}. Total received pay: $${totalReceivedPay.toFixed(2)}.`
+    message: `We got some good comments from customers about your service. Keep it up.\n- Weekly pay: $${weeklyPay}.
+- Deposit into high interest savings: $${savingsDeduction.toFixed(2)}.
+- Tax withholdings: $${taxWithholdings.toFixed(2)}.
+- Total received pay: $${totalReceivedPay.toFixed(2)}.`
 }))
 
 const phoneCasePrice = 24.99
@@ -71,7 +76,14 @@ store.dispatch(createTransaction({
     amount: totalPhoneCasePrice,
     type: TType.Withdrawal,
     subject: 'Order: AbIek3I903-a',
-    message: `1 SafeTech Pixel 2 Phonecase: $${phoneCasePrice.toFixed(2)} + $${phoneCaseTax.toFixed(2)} = $${totalPhoneCasePrice.toFixed(2)}. Approve the transaction to begin order processing as soon as the next business day.`
+    date: date.setMinutes(date.getMinutes() - 4),
+    message: `Order: AbIek3I903-a\n
+1 SafeTech Pixel 2 Phonecase:
+- Sale Price: $${phoneCasePrice.toFixed(2)}
+- Tax (HST): $${phoneCaseTax.toFixed(2)}
+- Total: $${totalPhoneCasePrice.toFixed(2)} (Free 1 day shipping)
+
+*Approve the transaction to begin order processing as soon as the next business day.*`
 }))
 
 // If you want your app to work offline and load faster, you can change

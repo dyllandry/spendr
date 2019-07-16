@@ -9,6 +9,7 @@ import { Dispatch } from 'redux';
 import { approveTransaction, declineTransaction } from '../store/transaction/actions';
 import { increaseBalance, decreaseBalance } from '../store/balance/actions';
 import { unfocusTransaction } from '../store/detailedTransaction/actions';
+const ReactMarkdown = require('react-markdown')
 
 const TransactionDetailView = ({
   id,
@@ -60,10 +61,13 @@ const TransactionDetailView = ({
             </div>
             <div className={styles.message}>
               {
-                t.message ||
-                <div className={styles.noMessage}>
-                  No attached message.
-                </div>
+                t.message !== ''
+                  ? <ReactMarkdown source={t.message} />
+                  : (
+                    <div className={styles.noMessage}>
+                      No attached message.
+                    </div>
+                  )
               }
             </div>
             <div className={styles.amountContainer}>
