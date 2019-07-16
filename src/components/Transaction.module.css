@@ -35,12 +35,29 @@
   text-overflow: ellipsis;
   width: 125px;
   margin-right: 5px;
+  font-weight: bold;
 }
 
 .amount {
   text-align: left;
   width: 80px;
   margin-right: 8px;
+  /* font-weight: bold; */
+}
+
+.amount__deposit {
+  composes: amount;
+  color: hsl(120, 100%, 19%);
+}
+
+.amount__withdrawal {
+  composes: amount;
+  color: hsl(0, 100%, 33%);
+}
+
+.focusedTransaction .amount__withdrawal,
+.focusedTransaction .amount__deposit {
+  color: white;
 }
 
 .amountSign {
@@ -74,11 +91,14 @@
 
 .date {
   color: hsla(0, 0%, 16%, 1);
+  margin-left: 12px;
 }
 
 @media only screen and (max-width: 500px) {
   .amount {
     font-size: 17px;
+    text-align: right;
+    margin-right: 0;
     font-weight: bold;
   }
 }

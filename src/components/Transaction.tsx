@@ -57,8 +57,8 @@ function Transaction({
             />
           </span>
           <span className={styles.mobileBottomFlex}>
-            <Amount amount={amount} type={type} />
             <Subject subject={subject} />
+            <Amount amount={amount} type={type} />
           </span>
         </div>
       </Media>
@@ -98,7 +98,11 @@ function Amount({
   type: TType
 }) {
   return (
-    <span className={styles.amount}>
+    <span className={
+      type === TType.Deposit
+        ? styles.amount__deposit
+        : styles.amount__withdrawal
+    }>
       <span className={styles.amountSign}>
         {type === TType.Deposit ? '+' : '-'}
       </span>

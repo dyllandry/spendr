@@ -1,4 +1,5 @@
 # To do
+- [ ] Reset detail transaction scroll on unfocusing
 - [ ] Add no transactions message to transaction list
 - [ ] Have date of approve / decline in detailed transaction view.
 - [ ] make balance do some cool animation
