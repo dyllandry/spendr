@@ -1,8 +1,8 @@
 # Spendr
 🏃‍High velocity online banking frontend prototype with React and Redux. Meant to be a joke project, too.
 
-A screenshot of the Spendr web application as of June 12th, 2019:
-![A screenshot of the Spendr web application as of June 12th, 2019](7-12-19_screen-shot.png)
+A screenshot of the Spendr web application as of June 16th, 2019:
+![A screenshot of the Spendr web application as of June 16th, 2019](7-16-19_screen-shot.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
