@@ -17,6 +17,11 @@ function TransactionList({
   unfocusTransaction: () => void,
   detailedTransaction: DetailedTransaction
 }) {
+  const tArray = Object.entries(transactions).map(([id, t]) => ({
+    id,
+    ...t,
+  }))
+  tArray.sort((t1, t2) => t1.date - t2.date)
   return (
     <div className={styles.container}>
       <h2 className={styles.transactionsHeader}>
@@ -29,16 +34,16 @@ function TransactionList({
           aria-live='polite'
           className={styles.list}
         >
-          {Object.entries(transactions).map(([id, t]) =>
+          {tArray.map(t =>
             <Transaction
-              key={id}
-              id={id}
+              key={t.id}
+              id={t.id}
               type={t.type}
               amount={t.amount}
               origin={t.origin}
               date={t.date}
               subject={t.subject}
-              onClick={() => { focusTransaction(id) }}
+              onClick={() => { focusTransaction(t.id) }}
             />
           )}
         </ul>
