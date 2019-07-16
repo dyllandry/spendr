@@ -5,7 +5,7 @@ import {
     BalanceActionTypes
 } from './types'
 
-const initialState: Balance = 25
+const initialState: Balance = 50
 
 export default function balanceReducer(
     state = initialState,
