@@ -1,5 +1,5 @@
 # Spendr
-🏃‍High velocity online banking frontend prototype with React and Redux. Meant to be a joke project, too.
+💰Online banking frontend prototype with React and Redux.
 
 A screenshot of the Spendr web application as of June 16th, 2019:
 ![A screenshot of the Spendr web application as of June 16th, 2019](7-16-19_screen-shot.png)
