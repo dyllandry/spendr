@@ -29,27 +29,35 @@ function TransactionList({
       </h2>
       <TFilter />
       <div className={styles.twoColumnView}>
-        <ul
+        <div
           id='transactions-list'
           aria-live='polite'
           className={styles.list}
+          role='tablist'
+          aria-label='Transactions'
         >
           {tArray.length === 0 &&
             <div className={styles.noTransactions}>No transactions found.</div>
           }
           {tArray.map(t =>
-            <Transaction
-              key={t.id}
-              id={t.id}
-              type={t.type}
-              amount={t.amount}
-              origin={t.origin}
-              date={t.date}
-              subject={t.subject}
-              onClick={() => { focusTransaction(t.id) }}
-            />
+            <button
+              className={styles.transactionContainer}
+              role='tab'
+              aria-selected={t.id === detailedTransaction}
+            >
+              <Transaction
+                key={t.id}
+                id={t.id}
+                type={t.type}
+                amount={t.amount}
+                origin={t.origin}
+                date={t.date}
+                subject={t.subject}
+                onClick={() => { focusTransaction(t.id) }}
+              />
+            </button>
           )}
-        </ul>
+        </div>
         <div className={
           detailedTransaction === null
             ? styles.tDVContainer

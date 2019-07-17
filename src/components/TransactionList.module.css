@@ -22,9 +22,22 @@
 .list {
   flex-grow: 1;
   list-style: none;
-  padding-left: 0;
-  margin: 0;
   width: 50%;
+}
+
+.transactionContainer {
+  border: none;
+  font-size: inherit;
+  text-align: inherit;
+  width: 100%;
+  display: block;
+  padding: 0;
+  margin: 0;
+  background-color: rgb(244, 244, 244);
+}
+
+.transactionContainer:nth-child(2n) {
+  background-color: white;
 }
 
 .tDVContainer {
