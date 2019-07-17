@@ -17,8 +17,8 @@ const mapStateToProps = (state: AppState) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  focusTransaction: (id: string) => {
-    dispatch(focusTransaction(id))
+  focusTransaction: (id: string, transactionElementId: string) => {
+    dispatch(focusTransaction(id, transactionElementId))
   },
   unfocusTransaction: () => {
     dispatch(unfocusTransaction())

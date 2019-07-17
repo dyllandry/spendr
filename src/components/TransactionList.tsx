@@ -13,7 +13,7 @@ function TransactionList({
   detailedTransaction
 }: {
   transactions: TransactionsState,
-  focusTransaction: (id: string) => void,
+  focusTransaction: (id: string, transactionElementId: string) => void,
   unfocusTransaction: () => void,
   detailedTransaction: DetailedTransaction
 }) {
@@ -39,24 +39,29 @@ function TransactionList({
           {tArray.length === 0 &&
             <div className={styles.noTransactions}>No transactions found.</div>
           }
-          {tArray.map(t =>
-            <button
-              className={styles.transactionContainer}
-              role='tab'
-              aria-selected={t.id === detailedTransaction}
-              tabIndex={-1}
-            >
-              <Transaction
+          {tArray.map((t, index) => {
+            const transactionElementId = `transaction ${index + 1}`
+            return (
+              <button
                 key={t.id}
-                id={t.id}
-                type={t.type}
-                amount={t.amount}
-                origin={t.origin}
-                date={t.date}
-                subject={t.subject}
-                onClick={() => { focusTransaction(t.id) }}
-              />
-            </button>
+                className={styles.transactionContainer}
+                role='tab'
+                aria-selected={t.id === detailedTransaction.id}
+                tabIndex={-1}
+                id={transactionElementId}
+              >
+                <Transaction
+                  id={t.id}
+                  type={t.type}
+                  amount={t.amount}
+                  origin={t.origin}
+                  date={t.date}
+                  subject={t.subject}
+                  onClick={() => { focusTransaction(t.id, transactionElementId) }}
+                />
+              </button>
+            )
+          }
           )}
         </div>
         <div className={

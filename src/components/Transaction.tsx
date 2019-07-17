@@ -114,7 +114,7 @@ function Amount({
 }
 
 const mapStateToProps = (state: AppState) => ({
-  focused: (id: string) => state.detailedTransaction === id
+  focused: (id: string) => state.detailedTransaction.id === id
 })
 
 export default connect(mapStateToProps)(Transaction)

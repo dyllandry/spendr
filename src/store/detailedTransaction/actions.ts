@@ -4,11 +4,12 @@ import {
   DetailedTransactionActionTypes
 } from "./types";
 
-export function focusTransaction(id: string): DetailedTransactionActionTypes {
+export function focusTransaction(id: string, elementId: string): DetailedTransactionActionTypes {
   return {
     type: FOCUS_TRANSACTION,
     payload: {
-      id
+      id,
+      elementId
     }
   }
 }

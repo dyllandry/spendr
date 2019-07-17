@@ -15,7 +15,7 @@ import { unfocusTransaction } from '../store/detailedTransaction/actions';
 const ReactMarkdown = require('react-markdown')
 
 const TransactionDetailView = ({
-  id,
+  detailedTransaction,
   transaction: t,
   approveTransaction,
   declineTransaction,
@@ -24,7 +24,7 @@ const TransactionDetailView = ({
   callback,
   unfocusTransaction
 }: {
-  id: DetailedTransaction,
+  detailedTransaction: DetailedTransaction,
   transaction: Transaction | null,
   approveTransaction: typeof approveTransactionAction,
   declineTransaction: typeof declineTransactionAction,
@@ -43,6 +43,8 @@ const TransactionDetailView = ({
     <div
       className={styles.default}
       ref={transactionDetailRef}
+      role='tabpanel'
+      aria-labelledby={detailedTransaction.elementId || undefined}
     >
       {t === null ? (
         <div>
@@ -115,10 +117,12 @@ const TransactionDetailView = ({
                     <button
                       className={styles.decline}
                       onClick={
-                        id !== null
+                        detailedTransaction.id !== null
                           ? () => {
-                            declineTransaction(id, Date.now())
-                            if (callback) callback()
+                            if (detailedTransaction.id !== null) {
+                              declineTransaction(detailedTransaction.id, Date.now())
+                              if (callback) callback()
+                            }
                           }
                           : undefined
                       }
@@ -128,15 +132,17 @@ const TransactionDetailView = ({
                     <button
                       className={styles.approve}
                       onClick={
-                        id !== null
+                        detailedTransaction.id !== null
                           ? () => {
-                            approveTransaction(id, Date.now())
-                            if (t.type === TType.Deposit) {
-                              increaseBalance(t.amount)
-                            } else if (t.type === TType.Withdrawal) {
-                              decreaseBalance(t.amount)
+                            if (detailedTransaction.id !== null) {
+                              approveTransaction(detailedTransaction.id, Date.now())
+                              if (t.type === TType.Deposit) {
+                                increaseBalance(t.amount)
+                              } else if (t.type === TType.Withdrawal) {
+                                decreaseBalance(t.amount)
+                              }
+                              if (callback) callback()
                             }
-                            if (callback) callback()
                           }
                           : undefined
                       }
@@ -154,9 +160,9 @@ const TransactionDetailView = ({
 }
 
 const mapStateToProps = (state: AppState) => ({
-  id: state.detailedTransaction,
-  transaction: state.detailedTransaction !== null
-    ? state.transactions[state.detailedTransaction]
+  detailedTransaction: state.detailedTransaction,
+  transaction: state.detailedTransaction.id !== null
+    ? state.transactions[state.detailedTransaction.id]
     : null
 })
 

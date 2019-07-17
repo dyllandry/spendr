@@ -5,7 +5,10 @@ import {
   UNFOCUS_TRANSACTION
 } from "./types";
 
-const initialState: DetailedTransaction = null
+const initialState: DetailedTransaction = {
+  id: null,
+  elementId: null
+}
 
 export default function (
   state = initialState,
@@ -13,9 +16,15 @@ export default function (
 ): DetailedTransaction {
   switch (action.type) {
     case FOCUS_TRANSACTION:
-      return action.payload.id
+      return {
+        id: action.payload.id,
+        elementId: action.payload.elementId
+      }
     case UNFOCUS_TRANSACTION:
-      return null
+      return {
+        id: null,
+        elementId: null
+      }
     default:
       return state
   }
