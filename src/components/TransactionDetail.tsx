@@ -84,6 +84,11 @@ const TransactionDetailView = ({
             </div>
             <div className={styles.amountContainer}>
               <div className={styles.amount}>
+                {
+                  t.type === TType.Deposit
+                    ? '+'
+                    : '-'
+                }
                 ${t.amount.toFixed(2)}
               </div>
               {t.status !== TStatus.Pending &&
