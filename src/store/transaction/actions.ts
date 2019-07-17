@@ -7,7 +7,7 @@ import {
   APPROVE_TRANSACTION,
   DECLINE_TRANSACTION
 } from './types'
-import { randomBase64 } from '../../base64'
+import { randomBase64 } from '../../scripts/base64'
 
 export function createTransaction({
   type = TType.Deposit,

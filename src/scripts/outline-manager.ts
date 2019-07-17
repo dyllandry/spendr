@@ -1,4 +1,4 @@
-import styles from './App.module.css'
+import styles from '../App.module.css'
 
 function outlineOnWithTab(event: KeyboardEvent): void {
   onTab(event, () => setOutline(true))

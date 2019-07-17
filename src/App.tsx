@@ -3,7 +3,7 @@ import Balance from './components/Balance';
 import VisibleTransactionList from './components/VisibleTransactionList';
 import Header from './components/Header';
 import { BrowserRouter as Router } from "react-router-dom";
-import * as OutlineManager from './outline-manager'
+import * as OutlineManager from './scripts/outline-manager'
 import styles from './App.module.css'
 
 OutlineManager.start()
