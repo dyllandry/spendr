@@ -44,6 +44,7 @@ function TransactionList({
               className={styles.transactionContainer}
               role='tab'
               aria-selected={t.id === detailedTransaction}
+              tabIndex={-1}
             >
               <Transaction
                 key={t.id}
