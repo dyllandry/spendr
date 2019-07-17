@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useRef } from 'react'
 import { connect } from 'react-redux'
 import styles from './TransactionDetail.module.css'
 import { DetailedTransaction } from "../store/detailedTransaction/types";
@@ -30,8 +30,15 @@ const TransactionDetailView = ({
   callback?: () => void,
   unfocusTransaction: () => void
 }) => {
+  const transactionDetailRef = useRef<HTMLDivElement>(null)
+  if (transactionDetailRef.current !== null) {
+    transactionDetailRef.current.scrollTop = 0
+  }
   return (
-    <div className={styles.default}>
+    <div
+      className={styles.default}
+      ref={transactionDetailRef}
+    >
       {t === null ? (
         <div>
           Select a transaction to view details.
