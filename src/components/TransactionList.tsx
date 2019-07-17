@@ -34,6 +34,9 @@ function TransactionList({
           aria-live='polite'
           className={styles.list}
         >
+          {tArray.length === 0 &&
+            <div className={styles.noTransactions}>No transactions found.</div>
+          }
           {tArray.map(t =>
             <Transaction
               key={t.id}
