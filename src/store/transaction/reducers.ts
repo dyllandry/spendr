@@ -24,26 +24,28 @@ export default (
 
 
     case DELETE_TRANSACTION: {
-      const { [action.payload]: transaction, ...stateToKeep } = state
+      const { [action.payload.id]: transaction, ...stateToKeep } = state
       return { ...stateToKeep }
     }
 
     case APPROVE_TRANSACTION: {
-      const { [action.payload]: transaction, ...stateToKeep } = state
+      const { [action.payload.id]: transaction, ...stateToKeep } = state
       return {
         ...stateToKeep,
-        [action.payload]: Object.assign({}, transaction, {
-          status: TStatus.Approved
+        [action.payload.id]: Object.assign({}, transaction, {
+          status: TStatus.Approved,
+          statusModifiedAt: action.payload.date
         })
       }
     }
 
     case DECLINE_TRANSACTION: {
-      const { [action.payload]: transaction, ...stateToKeep } = state
+      const { [action.payload.id]: transaction, ...stateToKeep } = state
       return {
         ...stateToKeep,
-        [action.payload]: Object.assign({}, transaction, {
-          status: TStatus.Declined
+        [action.payload.id]: Object.assign({}, transaction, {
+          status: TStatus.Declined,
+          statusModifiedAt: action.payload.date
         })
       }
     }

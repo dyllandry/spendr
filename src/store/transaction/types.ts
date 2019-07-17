@@ -8,6 +8,7 @@ export interface Transaction {
     date: number,
     status: TStatus,
     subject: string,
+    statusModifiedAt: number
 }
 
 export enum TType {
@@ -41,17 +42,25 @@ interface CreateTransactionAction {
 
 interface DeleteTransactionAction {
     type: typeof DELETE_TRANSACTION
-    payload: string
+    payload: {
+        id: string
+    }
 }
 
 interface ApproveTransactionAction {
     type: typeof APPROVE_TRANSACTION,
-    payload: string
+    payload: {
+        id: string,
+        date: number
+    }
 }
 
 interface DeclineTransactionAction {
     type: typeof DECLINE_TRANSACTION,
-    payload: string
+    payload: {
+        id: string,
+        date: number
+    }
 }
 
 export type TransactionActionTypes =

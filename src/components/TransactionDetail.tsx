@@ -6,7 +6,10 @@ import { AppState } from '../store';
 import { Transaction, TStatus, TType } from '../store/transaction/types';
 import FormattedDate from './FormattedDate';
 import { Dispatch } from 'redux';
-import { approveTransaction, declineTransaction } from '../store/transaction/actions';
+import {
+  approveTransaction as approveTransactionAction,
+  declineTransaction as declineTransactionAction
+} from '../store/transaction/actions';
 import { increaseBalance, decreaseBalance } from '../store/balance/actions';
 import { unfocusTransaction } from '../store/detailedTransaction/actions';
 const ReactMarkdown = require('react-markdown')
@@ -23,8 +26,8 @@ const TransactionDetailView = ({
 }: {
   id: DetailedTransaction,
   transaction: Transaction | null,
-  approveTransaction: (id: string) => void,
-  declineTransaction: (id: string) => void,
+  approveTransaction: typeof approveTransactionAction,
+  declineTransaction: typeof declineTransactionAction,
   increaseBalance: (amount: number) => void,
   decreaseBalance: (amount: number) => void
   callback?: () => void,
@@ -34,6 +37,8 @@ const TransactionDetailView = ({
   if (transactionDetailRef.current !== null) {
     transactionDetailRef.current.scrollTop = 0
   }
+  const statusModifiedToday = t &&
+    new Date(t.statusModifiedAt).getDate() === new Date(Date.now()).getDate()
   return (
     <div
       className={styles.default}
@@ -81,6 +86,24 @@ const TransactionDetailView = ({
               <div className={styles.amount}>
                 ${t.amount.toFixed(2)}
               </div>
+              {t.status !== TStatus.Pending &&
+                <div className={styles.statusModifiedAt}>
+                  (
+                    <span>
+                    {
+                      t.status.charAt(0)
+                        .toUpperCase()
+                        .concat(t.status.slice(1).toLowerCase())
+                    }
+                    {statusModifiedToday ? ' at ' : ' on '}
+                    <FormattedDate
+                      nowDate={new Date(Date.now())}
+                      itemDate={new Date(t.statusModifiedAt)}
+                    />
+                  </span>
+                  )
+                </div>
+              }
               <div>
                 {t.status === TStatus.Pending &&
                   <React.Fragment>
@@ -89,7 +112,7 @@ const TransactionDetailView = ({
                       onClick={
                         id !== null
                           ? () => {
-                            declineTransaction(id)
+                            declineTransaction(id, Date.now())
                             if (callback) callback()
                           }
                           : undefined
@@ -102,7 +125,7 @@ const TransactionDetailView = ({
                       onClick={
                         id !== null
                           ? () => {
-                            approveTransaction(id)
+                            approveTransaction(id, Date.now())
                             if (t.type === TType.Deposit) {
                               increaseBalance(t.amount)
                             } else if (t.type === TType.Withdrawal) {
@@ -133,8 +156,8 @@ const mapStateToProps = (state: AppState) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  approveTransaction: (id: string) => dispatch(approveTransaction(id)),
-  declineTransaction: (id: string) => dispatch(declineTransaction(id)),
+  approveTransaction: (id: string, date: number) => dispatch(approveTransactionAction(id, date)),
+  declineTransaction: (id: string, date: number) => dispatch(declineTransactionAction(id, date)),
   increaseBalance: (amount: number) => dispatch(increaseBalance(amount)),
   decreaseBalance: (amount: number) => dispatch(decreaseBalance(amount)),
   unfocusTransaction: () => dispatch(unfocusTransaction())

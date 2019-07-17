@@ -30,7 +30,8 @@ export function createTransaction({
         message,
         status,
         date,
-        subject
+        subject,
+        statusModifiedAt: date
       }
     }
   }
@@ -39,20 +40,28 @@ export function createTransaction({
 export function deleteTransaction(id: string): TransactionActionTypes {
   return {
     type: DELETE_TRANSACTION,
-    payload: id
+    payload: {
+      id
+    }
   }
 }
 
-export function approveTransaction(id: string): TransactionActionTypes {
+export function approveTransaction(id: string, date: number): TransactionActionTypes {
   return {
     type: APPROVE_TRANSACTION,
-    payload: id
+    payload: {
+      id,
+      date
+    }
   }
 }
 
-export function declineTransaction(id: string): TransactionActionTypes {
+export function declineTransaction(id: string, date: number): TransactionActionTypes {
   return {
     type: DECLINE_TRANSACTION,
-    payload: id
+    payload: {
+      id,
+      date
+    }
   }
 }
