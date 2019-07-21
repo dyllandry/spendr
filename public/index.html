@@ -32,7 +32,18 @@
 </head>
 
 <body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <script>
+    (function removeNoscriptContentsIfJSEnabled(){
+      // Because screen readers read the noscript tag even if js is enabled, and
+      // it interrupts what information should be announced first, let's remove
+      // the content so they can't read it allowed.
+      var noscriptElement = document.querySelector('noscript')
+      noscriptElement.innerHTML = ""
+    })()
+  </script>
   <div id="root"></div>
   <!--
       This HTML file is a template.
