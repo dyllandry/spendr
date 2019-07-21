@@ -43,7 +43,6 @@ const TransactionDetailView = ({
     <div
       className={styles.default}
       ref={transactionDetailRef}
-      role='tabpanel'
       aria-labelledby={detailedTransaction.elementId || undefined}
     >
       {t === null ? (

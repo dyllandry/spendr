@@ -33,7 +33,6 @@ function TransactionList({
           id='transactions-list'
           aria-live='polite'
           className={styles.list}
-          role='tablist'
           aria-label='Transactions'
         >
           {tArray.length === 0 &&
@@ -45,7 +44,6 @@ function TransactionList({
               <button
                 key={t.id}
                 className={styles.transactionContainer}
-                role='tab'
                 aria-selected={t.id === detailedTransaction.id}
                 tabIndex={-1}
                 id={transactionElementId}
