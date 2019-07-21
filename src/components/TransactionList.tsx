@@ -47,6 +47,7 @@ function TransactionList({
                 aria-selected={t.id === detailedTransaction.id}
                 tabIndex={-1}
                 id={transactionElementId}
+                    onClick={() => { focusTransaction(t.id, transactionElementId) }}
               >
                 <Transaction
                   id={t.id}
@@ -55,7 +56,6 @@ function TransactionList({
                   origin={t.origin}
                   date={t.date}
                   subject={t.subject}
-                  onClick={() => { focusTransaction(t.id, transactionElementId) }}
                 />
               </button>
             )

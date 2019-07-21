@@ -22,7 +22,7 @@ function Transaction({
   origin: string,
   date: number,
   subject: string,
-  onClick: () => void,
+  // onClick: () => void,
   focused: (id: string) => boolean
 }) {
   return (
@@ -32,7 +32,7 @@ function Transaction({
           ? styles.focusedTransaction
           : styles.transaction
       }
-      onClick={onClick}
+      // onClick={onClick}
     >
       <Media query='(min-width: 500px)'>
         <div className={styles.desktopTransaction}>
