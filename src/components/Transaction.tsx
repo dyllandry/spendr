@@ -13,7 +13,7 @@ function Transaction({
   origin,
   date: dateMs,
   subject,
-  focused
+  selected
 }: {
   id: string,
   type: TType,
@@ -21,13 +21,13 @@ function Transaction({
   origin: string,
   date: number,
   subject: string,
-  focused: (id: string) => boolean
+  selected: (id: string) => boolean
 }) {
   return (
     <li
       className={
-        focused(id)
-          ? styles.focusedTransaction
+        selected(id)
+          ? styles.selectedTransaction
           : styles.transaction
       }
     >
@@ -121,7 +121,7 @@ function Amount({
 }
 
 const mapStateToProps = (state: AppState) => ({
-  focused: (id: string) => state.detailedTransaction.id === id
+  selected: (id: string) => state.detailedTransaction.id === id
 })
 
 export default connect(mapStateToProps)(Transaction)

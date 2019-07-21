@@ -3,13 +3,13 @@
   justify-content: space-between;
 }
 
-.focusedTransaction {
+.selectedTransaction {
   composes: transaction;
   background-color: hsl(0, 71%, 38%)!important;
   color: white;
 }
 
-.focusedTransaction .date {
+.selectedTransaction .date {
   color: white;
 }
 
@@ -54,8 +54,8 @@
   color: hsl(0, 100%, 33%);
 }
 
-.focusedTransaction .amount__withdrawal,
-.focusedTransaction .amount__deposit {
+.selectedTransaction .amount__withdrawal,
+.selectedTransaction .amount__deposit {
   color: white;
 }
 

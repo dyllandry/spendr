@@ -7,19 +7,19 @@ import { AppState } from '../store';
 import { setTFilter } from "../store/tFilter/actions";
 import styles from "./TFilter.module.css"
 import Media from 'react-media';
-import { unfocusTransaction } from '../store/detailedTransaction/actions';
+import { deselectTransaction } from '../store/detailedTransaction/actions';
 const classNames = require('classnames')
 
 function TFilter({
   selected,
   select,
   transactionsPending,
-  unfocusTransaction
+  deselectTransaction
 }: {
   selected: TFilterType,
   select: (status: TFilterType) => void,
   transactionsPending: number,
-  unfocusTransaction: () => void
+  deselectTransaction: () => void
 }) {
   return (
     <div 
@@ -38,7 +38,7 @@ function TFilter({
       <button
         onClick={() => {
           select([TStatus.Pending])
-          unfocusTransaction()
+          deselectTransaction()
         }}
         aria-label='Filter transactions by pending.'
         title='Filter transactions by pending.'
@@ -55,7 +55,7 @@ function TFilter({
       <button
         onClick={() => {
           select([TStatus.Approved])
-          unfocusTransaction()
+          deselectTransaction()
         }}
         aria-label='Filter transactions by approved.'
         title='Filter transactions by approved.'
@@ -72,7 +72,7 @@ function TFilter({
       <button
         onClick={() => {
           select([TStatus.Declined])
-          unfocusTransaction()
+          deselectTransaction()
         }}
         aria-label='Filter transactions by declined.'
         title='Filter transactions by declined.'
@@ -98,7 +98,7 @@ const mapStateToProps = (state: AppState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   select: (status: TFilterType) => dispatch(setTFilter(status)),
-  unfocusTransaction: () => dispatch(unfocusTransaction())
+  deselectTransaction: () => dispatch(deselectTransaction())
 })
 
 export default connect(

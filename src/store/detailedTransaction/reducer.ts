@@ -1,13 +1,14 @@
 import {
   DetailedTransaction,
   DetailedTransactionActionTypes,
-  FOCUS_TRANSACTION,
-  UNFOCUS_TRANSACTION
+  SELECT_TRANSACTION,
+  DESELECT_TRANSACTION
 } from "./types";
 
 const initialState: DetailedTransaction = {
   id: null,
-  elementId: null
+  elementId: null,
+  lastSelectedId: null
 }
 
 export default function (
@@ -15,15 +16,17 @@ export default function (
   action: DetailedTransactionActionTypes
 ): DetailedTransaction {
   switch (action.type) {
-    case FOCUS_TRANSACTION:
+    case SELECT_TRANSACTION:
       return {
         id: action.payload.id,
-        elementId: action.payload.elementId
+        elementId: action.payload.elementId,
+        lastSelectedId: action.payload.id
       }
-    case UNFOCUS_TRANSACTION:
+    case DESELECT_TRANSACTION:
       return {
         id: null,
-        elementId: null
+        elementId: null,
+        lastSelectedId: state.lastSelectedId
       }
     default:
       return state

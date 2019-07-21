@@ -11,7 +11,7 @@ import {
   declineTransaction as declineTransactionAction
 } from '../store/transaction/actions';
 import { increaseBalance, decreaseBalance } from '../store/balance/actions';
-import { unfocusTransaction } from '../store/detailedTransaction/actions';
+import { deselectTransaction } from '../store/detailedTransaction/actions';
 const ReactMarkdown = require('react-markdown')
 
 const TransactionDetailView = ({
@@ -22,7 +22,7 @@ const TransactionDetailView = ({
   increaseBalance,
   decreaseBalance,
   callback,
-  unfocusTransaction
+  deselectTransaction
 }: {
   detailedTransaction: DetailedTransaction,
   transaction: Transaction | null,
@@ -31,7 +31,7 @@ const TransactionDetailView = ({
   increaseBalance: (amount: number) => void,
   decreaseBalance: (amount: number) => void
   callback?: () => void,
-  unfocusTransaction: () => void
+  deselectTransaction: () => void
 }) => {
   const transactionDetailRef = useRef<HTMLDivElement>(null)
   if (transactionDetailRef.current !== null) {
@@ -42,7 +42,6 @@ const TransactionDetailView = ({
   return (
     <div
       id='transaction--detail'
-      // tabIndex={-1}
       className={styles.default}
       ref={transactionDetailRef}
       aria-labelledby='transaction--dialog-label'
@@ -65,7 +64,7 @@ const TransactionDetailView = ({
         </span>
         { t && 
           <button
-            onClick={() => unfocusTransaction()}
+            onClick={() => deselectTransaction()}
             className={styles.closeButton}
             aria-label='Close transaction detail.'
           >
@@ -190,7 +189,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   declineTransaction: (id: string, date: number) => dispatch(declineTransactionAction(id, date)),
   increaseBalance: (amount: number) => dispatch(increaseBalance(amount)),
   decreaseBalance: (amount: number) => dispatch(decreaseBalance(amount)),
-  unfocusTransaction: () => dispatch(unfocusTransaction())
+  deselectTransaction: () => dispatch(deselectTransaction())
 })
 
 export default connect(

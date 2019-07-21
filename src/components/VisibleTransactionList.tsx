@@ -7,8 +7,8 @@ import {
 import { TFilter } from "../store/tFilter/types";
 import { Dispatch } from 'redux';
 import {
-  focusTransaction,
-  unfocusTransaction
+  selectTransaction,
+  deselectTransaction
 } from "../store/detailedTransaction/actions";
 
 const mapStateToProps = (state: AppState) => ({
@@ -18,10 +18,10 @@ const mapStateToProps = (state: AppState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   focusTransaction: (id: string, transactionElementId: string) => {
-    dispatch(focusTransaction(id, transactionElementId))
+    dispatch(selectTransaction(id, transactionElementId))
   },
   unfocusTransaction: () => {
-    dispatch(unfocusTransaction())
+    dispatch(deselectTransaction())
   }
 })
 

@@ -1,21 +1,22 @@
 import {
-  FOCUS_TRANSACTION,
-  UNFOCUS_TRANSACTION,
+  SELECT_TRANSACTION,
+  DESELECT_TRANSACTION,
   DetailedTransactionActionTypes
 } from "./types";
 
-export function focusTransaction(id: string, elementId: string): DetailedTransactionActionTypes {
+export function selectTransaction(id: string, elementId: string): DetailedTransactionActionTypes {
   return {
-    type: FOCUS_TRANSACTION,
+    type: SELECT_TRANSACTION,
     payload: {
       id,
-      elementId
+      elementId,
+      lastSelectedId: id
     }
   }
 }
 
-export function unfocusTransaction(): DetailedTransactionActionTypes {
+export function deselectTransaction(): DetailedTransactionActionTypes {
   return {
-    type: UNFOCUS_TRANSACTION
+    type: DESELECT_TRANSACTION
   }
 }
