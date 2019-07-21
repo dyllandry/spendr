@@ -42,11 +42,11 @@ function TransactionList({
           {tArray.map((t, index) => {
             const transactionElementId = `transaction ${index + 1}`
             return (
-                <li
+              <li
+                  key={t.id}
                   className={styles.transactionListItem}
                 >
                   <button
-                    key={t.id}
                     className={styles.transactionButton}
                     aria-haspopup='true'
                     id={transactionElementId}
