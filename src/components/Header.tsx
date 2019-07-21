@@ -11,14 +11,14 @@ export default function Header() {
             Spendr
             </Link>
         </h1>
-        <nav>
+        <nav aria-label='main navigation menu'>
           <ul
             role='menubar'
             aria-label='main navigation menu'
             className={styles.headerNavList}
           >
             <li role='none'>
-              {/* first menubar menuitem is tab-focusable */}
+              {/* only first menubar menuitem is tab-focusable */}
               <a
                 href={'https://github.com/dyllandry/spendr'}
                 role='menuitem'
