@@ -40,10 +40,11 @@ const TransactionDetailView = ({
   const statusModifiedToday = t &&
     new Date(t.statusModifiedAt).getDate() === new Date(Date.now()).getDate()
   return (
-    <div
+    <section
       className={styles.default}
       ref={transactionDetailRef}
-      aria-labelledby={detailedTransaction.elementId || undefined}
+      aria-live='polite'
+      aria-label='transaction details'
     >
       {t === null ? (
         <div>
@@ -55,6 +56,7 @@ const TransactionDetailView = ({
               <button
                 onClick={() => unfocusTransaction()}
                 className={styles.closeButton}
+                aria-label='Close transaction detail.'
               >
                 X
               </button>
@@ -154,7 +156,7 @@ const TransactionDetailView = ({
             </div>
           </Fragment>
         )}
-    </div>
+    </section>
   )
 }
 
