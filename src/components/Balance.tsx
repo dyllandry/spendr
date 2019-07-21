@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-// eslint-disable-next-line
 import { AppState } from '../store/'
 import { Balance as BalanceType } from '../store/balance/types'
 import styles from "./Balance.module.css";
