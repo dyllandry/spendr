@@ -84,7 +84,9 @@ function Origin({
 }) {
   return (
     <span className={styles.origin}>
+      <span className="screen-reader-only">Transaction from: </span>
       {origin}
+      <span className="screen-reader-only">,</span>
     </span>
   )
 }
@@ -97,16 +99,22 @@ function Amount({
   type: TType
 }) {
   return (
-    <span className={
-      type === TType.Deposit
-        ? styles.amount__deposit
-        : styles.amount__withdrawal
+    <span 
+      className={
+        type === TType.Deposit
+          ? styles.amount__deposit
+          : styles.amount__withdrawal
     }>
-      <span className={styles.amountSign}>
+      <span 
+        className={styles.amountSign}
+        aria-hidden='true'
+      >
         {type === TType.Deposit ? '+' : '-'}
       </span>
       <span className={styles.amountQuantity}>
+        <span className="screen-reader-only">{type.toLowerCase()} of: </span>
         ${amount.toFixed(2)}
+        <span className="screen-reader-only">,</span>
       </span>
     </span>
   )

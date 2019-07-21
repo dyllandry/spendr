@@ -12,7 +12,12 @@ export default function FormattedDate({
   const dateString = getFormattedDateString(itemDate, nowDate)
   return (
     <span className={className}>
-      {dateString}
+      <span aria-hidden='true'>
+        {dateString}
+      </span>
+      <span className='screen-reader-only'>
+        {'Received on: ' + getAriaReadableDate(itemDate)}
+      </span>
     </span>
   )
 }
