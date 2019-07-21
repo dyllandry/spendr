@@ -11,10 +11,10 @@ export default function Header() {
             Spendr
             </Link>
         </h1>
-        <nav aria-label='main navigation menu'>
+        <nav aria-label='main navigation'>
           <ul
             role='menubar'
-            aria-label='main navigation menu'
+            aria-label='main navigation'
             className={styles.headerNavList}
           >
             <li role='none'>
@@ -26,7 +26,7 @@ export default function Header() {
                 className={`${styles.headerLink} ${styles.headerNavLink}`}
               >
                 About
-                </a>
+              </a>
             </li>
           </ul>
         </nav>
