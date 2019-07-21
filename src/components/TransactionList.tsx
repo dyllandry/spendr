@@ -28,15 +28,13 @@ function TransactionList({
         Transactions
       </h2>
       <TFilter />
-      <div 
-        className={styles.twoColumnView}
-        role='region'
-        aria-label='transactions list'
-      >
+      <div className={styles.twoColumnView}>
         <ol
           id='transactions-list'
           aria-live='polite'
           className={styles.list}
+          role='region'
+          aria-label='transactions list'
         >
           {tArray.length === 0 &&
             <li className={styles.noTransactions}>No transactions found.</li>

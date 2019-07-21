@@ -40,11 +40,12 @@ const TransactionDetailView = ({
   const statusModifiedToday = t &&
     new Date(t.statusModifiedAt).getDate() === new Date(Date.now()).getDate()
   return (
-    <section
+    <div
       className={styles.default}
       ref={transactionDetailRef}
       aria-live='polite'
       aria-label='transaction details'
+      role='region'
     >
       {t === null ? (
         <div>
@@ -156,7 +157,7 @@ const TransactionDetailView = ({
             </div>
           </Fragment>
         )}
-    </section>
+    </div>
   )
 }
 
