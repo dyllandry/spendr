@@ -71,7 +71,9 @@ function Subject({
 }) {
   return (
     <span className={styles.subject}>
+      <span className='screen-reader-only'>Subject of: </span>
       {subject}
+      <span className='screen-reader-only'>,</span>
     </span>
   )
 }
