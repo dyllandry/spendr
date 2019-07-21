@@ -13,7 +13,6 @@ function Transaction({
   origin,
   date: dateMs,
   subject,
-  onClick,
   focused
 }: {
   id: string,
@@ -22,7 +21,6 @@ function Transaction({
   origin: string,
   date: number,
   subject: string,
-  // onClick: () => void,
   focused: (id: string) => boolean
 }) {
   return (
