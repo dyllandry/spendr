@@ -30,7 +30,6 @@ function Transaction({
           ? styles.focusedTransaction
           : styles.transaction
       }
-      // onClick={onClick}
     >
       <Media query='(min-width: 500px)'>
         <div className={styles.desktopTransaction}>
