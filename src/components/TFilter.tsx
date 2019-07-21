@@ -22,7 +22,11 @@ function TFilter({
   unfocusTransaction: () => void
 }) {
   return (
-    <div className={styles.container}>
+    <div 
+      className={styles.container}
+      role='region'
+      aria-label='transaction filters'
+    >
       <Media query='(min-width: 385px)'>
         <span 
           className={styles.filtersLabel}
