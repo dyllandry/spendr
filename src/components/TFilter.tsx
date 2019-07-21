@@ -24,9 +24,12 @@ function TFilter({
   return (
     <div className={styles.container}>
       <Media query='(min-width: 385px)'>
-        <React.Fragment>
+        <span 
+          className={styles.filtersLabel}
+          aria-hidden='true'
+        >
           Filter by
-        </React.Fragment>
+        </span>
       </Media>
       <button
         onClick={() => {
