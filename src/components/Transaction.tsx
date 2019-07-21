@@ -72,7 +72,7 @@ function Subject({
     <span className={styles.subject}>
       <span className='screen-reader-only'>Subject of: </span>
       {subject}
-      <span className='screen-reader-only'>,</span>
+      <span className='screen-reader-only'> ,</span>
     </span>
   )
 }
@@ -86,7 +86,7 @@ function Origin({
     <span className={styles.origin}>
       <span className="screen-reader-only">Transaction from: </span>
       {origin}
-      <span className="screen-reader-only">,</span>
+      <span className="screen-reader-only"> ,</span>
     </span>
   )
 }
