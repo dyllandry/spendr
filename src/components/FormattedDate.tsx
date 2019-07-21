@@ -17,6 +17,46 @@ export default function FormattedDate({
   )
 }
 
+const Months= [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+]
+
+/**
+ * Converst a date into a more aria readable format: "January 1 1970 12:00 AM"
+ * @param {Date} date The date to format.
+ * @returns {string} The formatted string.
+ */
+function getAriaReadableDate(date: Date): string {
+  return `${Months[date.getMonth()]}` 
+    + ` ${date.getDate()} ${date.getFullYear()}` 
+    + ` at ` + getPostMeridiem(date)
+}
+
+/**
+ * Formats a date into a time using Post Meridiem (PM/AM) system.
+ * @param {Date} date The date to convert.
+ * @returns {string} The resulting string in Post Meridiem.
+ */
+function getPostMeridiem (date: Date): string {
+  const hours = (date.getHours() + 12) % 12
+  const minutes = date.getMinutes() < 10 
+    ? '0' + date.getMinutes()
+    : date.getMinutes()
+  const suffix = date.getHours() > 12 ? 'PM' : 'AM'
+  return `${hours}:${minutes} ${suffix}`
+}
+
 /**
  * Returns a formatted date string, either in day/month/year or a 00:00 am/pm
  * time if the transaction's date is today.
@@ -25,18 +65,6 @@ export default function FormattedDate({
  * @returns {string} Formatted date string.
  */
 function getFormattedDateString(tDate: Date, now: Date): string {
-  if (tDate.getDate() === now.getDate()) return getFormattedTimeString(tDate)
+  if (tDate.getDate() === now.getDate()) return getPostMeridiem(tDate)
   else return `${tDate.getDate()}/${tDate.getMonth() + 1}/${tDate.getFullYear()}`
-}
-
-/**
- * Returns a formatted string from a date object as a 00:00 am/pm format.
- * @param date {Date} 
- * @returns {Date} Formatted time.
- */
-function getFormattedTimeString(date: Date): string {
-  const hours = date.getHours() < 13 ? date.getHours() : date.getHours() % 12
-  const minutes = date.getMinutes().toString().padStart(2, '0')
-  const amPm = date.getHours() > 11 ? 'pm' : 'am'
-  return `${hours}:${minutes} ${amPm}`
 }
