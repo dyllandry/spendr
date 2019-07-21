@@ -28,40 +28,46 @@ function TransactionList({
         Transactions
       </h2>
       <TFilter />
-      <div className={styles.twoColumnView}>
-        <div
+      <div 
+        className={styles.twoColumnView}
+        role='region'
+        aria-label='transactions list'
+      >
+        <ol
           id='transactions-list'
           aria-live='polite'
           className={styles.list}
-          aria-label='Transactions'
         >
           {tArray.length === 0 &&
-            <div className={styles.noTransactions}>No transactions found.</div>
+            <li className={styles.noTransactions}>No transactions found.</li>
           }
           {tArray.map((t, index) => {
             const transactionElementId = `transaction ${index + 1}`
             return (
-              <button
-                key={t.id}
-                className={styles.transactionContainer}
-                aria-selected={t.id === detailedTransaction.id}
-                tabIndex={-1}
-                id={transactionElementId}
+                <li
+                  className={styles.transactionListItem}
+                >
+                  <button
+                    key={t.id}
+                    className={styles.transactionButton}
+                    aria-haspopup='true'
+                    id={transactionElementId}
                     onClick={() => { focusTransaction(t.id, transactionElementId) }}
-              >
-                <Transaction
-                  id={t.id}
-                  type={t.type}
-                  amount={t.amount}
-                  origin={t.origin}
-                  date={t.date}
-                  subject={t.subject}
-                />
-              </button>
+                  >
+                    <Transaction
+                      id={t.id}
+                      type={t.type}
+                      amount={t.amount}
+                      origin={t.origin}
+                      date={t.date}
+                      subject={t.subject}
+                    />
+                  </button>
+                </li>
             )
           }
           )}
-        </div>
+        </ol>
         <div className={
           detailedTransaction.id === null
             ? styles.tDVContainer

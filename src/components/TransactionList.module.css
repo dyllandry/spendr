@@ -23,9 +23,15 @@
   flex-grow: 1;
   list-style: none;
   width: 50%;
+  padding: 0;
+  margin: 0;
 }
 
-.transactionContainer {
+.transactionListItem:nth-child(2n) .transactionButton {
+  background-color: white;
+}
+
+.transactionButton {
   border: none;
   font-size: inherit;
   text-align: inherit;
@@ -36,9 +42,9 @@
   background-color: rgb(244, 244, 244);
 }
 
-.transactionContainer:nth-child(2n) {
+/* .transactionContainer:nth-child(2n) {
   background-color: white;
-}
+} */
 
 .tDVContainer {
   width: 50%;
