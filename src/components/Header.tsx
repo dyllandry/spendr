@@ -4,17 +4,16 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <div className={styles.header}>
+    <header className={styles.header}>
       <div className={styles.headerFlex}>
         <h1 className={styles.siteTitle}>
           <Link className={styles.headerLink} to={'/'}>
             Spendr
             </Link>
         </h1>
-        <nav aria-label='main navigation'>
+        <nav role='navigation' aria-label='main navigation'>
           <ul
             role='menubar'
-            aria-label='main navigation'
             className={styles.headerNavList}
           >
             <li role='none'>
@@ -31,6 +30,6 @@ export default function Header() {
           </ul>
         </nav>
       </div>
-    </div>
+    </header>
   )
 }
