@@ -64,7 +64,15 @@ const TransactionDetailView = ({
         </span>
         { t && 
           <button
-            onClick={() => deselectTransaction()}
+            onClick={() => {
+              if (detailedTransaction.id) {
+                const lastDetailedTransaction = document.getElementById(detailedTransaction.id)
+                if (lastDetailedTransaction) {
+                  lastDetailedTransaction.focus()
+                }
+              }
+              deselectTransaction()
+            }}
             className={styles.closeButton}
             aria-label='Close transaction detail.'
           >
@@ -139,6 +147,7 @@ const TransactionDetailView = ({
                           ? () => {
                             if (detailedTransaction.id !== null) {
                               declineTransaction(detailedTransaction.id, Date.now())
+                              focusTransactionAtIndex(1)
                               if (callback) callback()
                             }
                           }
@@ -159,6 +168,7 @@ const TransactionDetailView = ({
                               } else if (t.type === TType.Withdrawal) {
                                 decreaseBalance(t.amount)
                               }
+                              focusTransactionAtIndex(1)
                               if (callback) callback()
                             }
                           }
@@ -175,6 +185,12 @@ const TransactionDetailView = ({
         )}
     </div>
   )
+}
+
+function focusTransactionAtIndex (index: number) {
+  const transactionAtIndex = document.querySelector<HTMLElement>(`#transactions-list li:nth-child(${index+1}) button`)
+  console.log(transactionAtIndex)
+  if (transactionAtIndex) transactionAtIndex.focus()
 }
 
 const mapStateToProps = (state: AppState) => ({
