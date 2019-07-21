@@ -31,7 +31,6 @@ function TransactionList({
       <div className={styles.twoColumnView}>
         <ol
           id='transactions-list'
-          aria-live='polite'
           className={styles.list}
           role='region'
           aria-label='transactions list'
