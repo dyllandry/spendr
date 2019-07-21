@@ -41,30 +41,44 @@ const TransactionDetailView = ({
     new Date(t.statusModifiedAt).getDate() === new Date(Date.now()).getDate()
   return (
     <div
+      id='transaction--detail'
+      // tabIndex={-1}
       className={styles.default}
       ref={transactionDetailRef}
-      aria-live='polite'
-      aria-label='transaction details'
-      role='region'
+      aria-labelledby='transaction--dialog-label'
+      aria-describedby='transaction--dialog-description'
+      role='dialog'
+      aria-modal='true'
     >
+      <div 
+        className='screen-reader-only' 
+        id='transaction--dialog-label'
+      >
+        Transaction Details
+      </div> 
+      <div className={styles.subject}>
+        <span 
+          id='transaction--dialog-description'
+          tabIndex={0}
+        >
+          {t && t.subject}
+        </span>
+        { t && 
+          <button
+            onClick={() => unfocusTransaction()}
+            className={styles.closeButton}
+            aria-label='Close transaction detail.'
+          >
+            X
+          </button>
+        }
+      </div>
       {t === null ? (
-        <div>
+        <div id='transaction--dialog-description'>
           Select a transaction to view details.
         </div>
       ) : (
           <Fragment>
-            <div className={styles.subject}>
-              <button
-                onClick={() => unfocusTransaction()}
-                className={styles.closeButton}
-                aria-label='Close transaction detail.'
-              >
-                X
-              </button>
-              <span>
-                {t.subject}
-              </span>
-            </div>
             <div className={styles.originContainer}>
               <span className={styles.origin}>
                 {t.origin}
@@ -88,12 +102,15 @@ const TransactionDetailView = ({
             </div>
             <div className={styles.amountContainer}>
               <div className={styles.amount}>
-                {
-                  t.type === TType.Deposit
-                    ? '+'
-                    : '-'
-                }
-                ${t.amount.toFixed(2)}
+                <span aria-hidden='true'>
+                  {
+                    t.type === TType.Deposit
+                      ? '+'
+                      : '-'
+                  }
+                </span>
+                <span className='screen-reader-only'>{`${t.type.toLowerCase()} of: `}</span>
+                {`$${t.amount.toFixed(2)}`}
               </div>
               {t.status !== TStatus.Pending &&
                 <div className={styles.statusModifiedAt}>

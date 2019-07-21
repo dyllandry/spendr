@@ -50,7 +50,11 @@ function TransactionList({
                     className={styles.transactionButton}
                     aria-haspopup='true'
                     id={transactionElementId}
-                    onClick={() => { focusTransaction(t.id, transactionElementId) }}
+                    onClick={() => { 
+                      focusTransaction(t.id, transactionElementId) 
+                      const tDetail = document.querySelector<HTMLElement>('#transaction--dialog-description')
+                      if (tDetail) tDetail.focus()
+                    }}
                   >
                     <Transaction
                       id={t.id}
