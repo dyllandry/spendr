@@ -63,7 +63,7 @@ function TransactionList({
           )}
         </div>
         <div className={
-          detailedTransaction === null
+          detailedTransaction.id === null
             ? styles.tDVContainer
             : styles.tDVContainerVisible
         }>
