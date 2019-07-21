@@ -10,9 +10,9 @@ function Balance({
   balance: BalanceType
 }) {
   return (
-    <div className={styles.balance}>
+    <div aria-label='Account balance.' role='region' className={styles.balance}>
       <div className={styles.balanceAmount}>
-        ${balance.toFixed(2)}
+        {`$${balance.toFixed(2)}`}
       </div>
     </div>
   )
