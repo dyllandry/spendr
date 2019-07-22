@@ -146,8 +146,13 @@ const TransactionDetailView = ({
                         detailedTransaction.id !== null
                           ? () => {
                             if (detailedTransaction.id !== null) {
+                              setAriaLiveFeedback('Transaction declined!')
                               declineTransaction(detailedTransaction.id, Date.now())
-                              focusTransactionAtIndex(1)
+                              // Delay allows screen readers to first read aloud
+                              // the aria feedback span before announcing
+                              // exiting the dialogue and returning to the
+                              // transaction list.
+                              window.setTimeout(() => focusFirstTransaction(), 100)
                               if (callback) callback()
                             }
                           }
@@ -162,13 +167,18 @@ const TransactionDetailView = ({
                         detailedTransaction.id !== null
                           ? () => {
                             if (detailedTransaction.id !== null) {
+                              setAriaLiveFeedback('Transaction approved!')
                               approveTransaction(detailedTransaction.id, Date.now())
                               if (t.type === TType.Deposit) {
                                 increaseBalance(t.amount)
                               } else if (t.type === TType.Withdrawal) {
                                 decreaseBalance(t.amount)
                               }
-                              focusTransactionAtIndex(1)
+                              // Delay allows screen readers to first read aloud
+                              // the aria feedback span before announcing
+                              // exiting the dialogue and returning to the
+                              // transaction list.
+                              window.setTimeout(() => focusFirstTransaction(), 100)
                               if (callback) callback()
                             }
                           }
@@ -183,12 +193,23 @@ const TransactionDetailView = ({
             </div>
           </Fragment>
         )}
+        <span 
+          id='aria-live-feedback'
+          className='screen-reader-only'
+          aria-live='assertive'
+        >
+        </span>
     </div>
   )
 }
 
-function focusTransactionAtIndex (index: number) {
-  const transactionAtIndex = document.querySelector<HTMLElement>(`#transactions-list li:nth-child(${index+1}) button`)
+function setAriaLiveFeedback(feedback: string): void {
+  const ariaLiveFeedback = document.getElementById('aria-live-feedback')
+  if (ariaLiveFeedback !== null) ariaLiveFeedback.innerHTML = feedback
+}
+
+function focusFirstTransaction () {
+  const transactionAtIndex = document.querySelector<HTMLElement>(`#transactions-list li:first-child button`)
   console.log(transactionAtIndex)
   if (transactionAtIndex) transactionAtIndex.focus()
 }
